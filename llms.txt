@@ -1,18 +1,16 @@
 # chat-to-docx
 
-> Agent Skill: convert user-supplied AI chat transcripts and Markdown to Word DOCX with editable native OMML equations.
+> Convert AI chat transcripts and Markdown into Word DOCX with editable OMML equations.
 
-中文：解决 AI 聊天公式复制到 Word 后乱码、LaTeX 源码残留、公式图片无法编辑的问题。默认完整保留消息顺序、标题、列表、表格和代码块。
+中文：将 AI 聊天记录转成 Word，保留标题、列表、表格、代码块和消息顺序，公式使用 Word 原生可编辑 OMML。
 
-Repository: https://github.com/xggqqwd-Lucas/chat-to-docx
+## Documentation
 
-## Authoritative files
+- [README](https://github.com/xggqqwd-Lucas/chat-to-docx/blob/main/README.md): Installation, usage and dependencies.
+- [SKILL.md](https://github.com/xggqqwd-Lucas/chat-to-docx/blob/main/SKILL.md): Agent workflow.
+- [Equation workflow](https://github.com/xggqqwd-Lucas/chat-to-docx/blob/main/references/equation-workflow.md): MathML to OMML.
+- [Example](https://github.com/xggqqwd-Lucas/chat-to-docx/blob/main/examples/chat-with-equations.md): Fourier transform, wavelets, normalization and cross-entropy.
 
-- [README](https://github.com/xggqqwd-Lucas/chat-to-docx/blob/main/README.md): Chinese pain points, installation and English discovery summary.
-- [SKILL.md](https://github.com/xggqqwd-Lucas/chat-to-docx/blob/main/SKILL.md): Agent instructions and validation requirements.
-- [Equation workflow](https://github.com/xggqqwd-Lucas/chat-to-docx/blob/main/references/equation-workflow.md): MathML-to-OMML conversion.
-- [Synthetic example](https://github.com/xggqqwd-Lucas/chat-to-docx/blob/main/examples/chat-with-equations.md): Fourier transform, wavelets, normalization and cross-entropy. No real user conversation.
+## Environment
 
-## Limits
-
-This is an agent workflow with helper scripts, not a complete standalone Markdown parser. Requires local document/conversion/rendering dependencies. Never describe formula screenshots or raw LaTeX text as editable OMML. Search indexing and LLM discovery are not guaranteed.
+Python, python-docx, lxml and the local Office MML2OMML.XSL stylesheet. The helper converts MathML; an agent handles source parsing and document assembly.
