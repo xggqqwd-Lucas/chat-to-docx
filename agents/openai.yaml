@@ -1,0 +1,4 @@
+interface:
+  display_name: "聊天转 Word（chat-to-docx）"
+  short_description: "将聊天记录与 Markdown 完整转换为保留结构和可编辑 OMML 公式的 Word"
+  default_prompt: "Use $chat-to-docx to convert the supplied chat records into a DOCX, preserving source order and structure and converting inline and display math to editable OMML equations."
