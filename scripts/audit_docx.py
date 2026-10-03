@@ -14,7 +14,7 @@ from xml.etree import ElementTree as ET
 
 W_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 M_NS = "http://schemas.openxmlformats.org/officeDocument/2006/math"
-SUSPICIOUS = ("\ufffd", "cite", "navlist", "椤栤偓", "综合色")
+SUSPICIOUS = ("\ufffd", "\ue200cite", "\ue200navlist")
 
 
 def audit(path: Path) -> dict:
