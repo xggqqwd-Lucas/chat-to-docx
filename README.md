@@ -24,6 +24,15 @@ Use editable OMML for inline and display equations.
 
 The default is a full transcript conversion. Request "extract the latest draft only" when that is what you need.
 
+### Match a reference document
+
+Attach a reference Word document before or together with the transcript. The agent reads its formatting, summarizes the fonts, sizes, line spacing, indentation, page setup, headings, tables, and equation numbering, then uses that profile for the export. A reference supplied earlier stays active for later conversions. Without a reference, it uses an A4 layout with 11 pt body text and 1.25 line spacing.
+
+```text
+Use this DOCX as the formatting reference. Summarize its main formatting,
+then convert the attached chat transcript using the same layout and editable OMML equations.
+```
+
 ### Equations and layout
 
 - Recognizes `$...$`, `$$...$$`, `\(...\)`, and `\[...\]` outside code blocks.
@@ -61,6 +70,7 @@ python scripts/audit_docx.py final.docx --expect-equations 5 --json
 |---|---|
 | [SKILL.md](SKILL.md) | Agent instructions |
 | [Equation workflow](references/equation-workflow.md) | MathML to OMML |
+| [Formatting profile](references/formatting-profile.md) | Reference formatting and export defaults |
 | [Content extraction](references/extraction-and-cleanup.md) | Chat selection and Markdown cleanup |
 | [mathml_to_omml.py](scripts/mathml_to_omml.py) | Equation conversion helper |
 | [audit_docx.py](scripts/audit_docx.py) | Equation count and artifact checks |
@@ -90,6 +100,15 @@ AI chat and Markdown to Word DOCX with editable OMML equations.
 ```
 
 默认完整转换。只需要最终正文时，可以指定“仅提取最新版”。
+
+## 沿用参考文件格式
+
+可以先发送一份参考 Word 文件，再发送聊天记录，也可以同时提供。技能会读取文件内容与版式，概述字体、字号、行距、缩进、页面设置、标题、表格和公式编号方式，然后按提取的格式生成 Word。之前提供的参考文件会继续用于后续转换；没有参考文件时，使用 A4、正文 11 pt、1.25 倍行距的默认版式。
+
+```text
+请将这份 DOCX 作为格式参考，先总结主要格式，
+再按同样的版式把聊天记录转换为 Word，公式使用可编辑 OMML。
+```
 
 ## 公式和排版
 
@@ -128,6 +147,7 @@ python scripts/audit_docx.py final.docx --expect-equations 5 --json
 |---|---|
 | [SKILL.md](SKILL.md) | 技能入口 |
 | [公式流程](references/equation-workflow.md) | MathML 到 OMML |
+| [格式提取](references/formatting-profile.md) | 参考文件分析与默认版式 |
 | [内容整理](references/extraction-and-cleanup.md) | 聊天提取与 Markdown 处理 |
 | [mathml_to_omml.py](scripts/mathml_to_omml.py) | 公式转换辅助脚本 |
 | [audit_docx.py](scripts/audit_docx.py) | 公式数量和文字残留检查 |
