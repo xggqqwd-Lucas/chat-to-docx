@@ -2,42 +2,23 @@
 
 ## Select content
 
-For full-chat conversion, preserve every supplied message in source order, including speaker labels, headings, lists, tables, and code blocks. Do not select just one answer or remove repeated headings belonging to different messages. Interpret Markdown formatting into Word structures; remove delimiter syntax only after preserving the represented content.
+For a full transcript, preserve every supplied message in source order, including speaker labels, headings, lists, tables, and code blocks. Translate Markdown structure into native Word elements.
 
-### When the user explicitly requests the latest draft
+When the user requests the latest draft:
 
-Build a short decision log before editing:
-
-1. Locate the last full manuscript block.
+1. Locate the last complete draft.
 2. Apply later explicit corrections in chronological order.
-3. Record frozen titles and phrases.
-4. Exclude exploratory outlines and rejected variants.
+3. Preserve finalized titles and phrases.
+4. Exclude rejected variants and exploratory outlines.
 
-## Clean chat-only artifacts
+## Clean source artifacts
 
-Remove or normalize:
+Normalize dynamic citation and navigation markers using their original sources when available. Strip outer transport-only fences while preserving actual code blocks, language labels, and their contents.
 
-- dynamic ChatGPT markers: `cite...`, `navlist...`;
-- outer transport-only Markdown fences; preserve actual code-block contents, language labels, and transcript messages;
-- duplicated headings only in latest-draft mode when they are extraction artifacts;
-- replacement characters (`U+FFFD`, `�`);
-- obvious UTF-8/GBK mojibake sequences.
-
-Do not fabricate missing citations. If citation recovery is part of the request, use the dedicated citation-backtrace or citation-repair workflow instead of deleting source semantics.
-
-## Repair terminology conservatively
-
-Encoding corruption may create readable-looking but invalid domain words. Infer a correction only when the surrounding sentence and repeated usage make it unambiguous. Examples include replacing a corrupted form of “色度学” or “色域” only when the technical sentence clearly requires that term. If uncertain, preserve the source in notes and ask the user.
+Repair replacement characters and encoding damage only when the intended wording is unambiguous. For uncertain domain terminology, retain the source and request clarification.
 
 ## Normalize equations
 
-Separate each display equation from prose and represent it in structured form. Preserve:
+Preserve subscripts, superscripts, matrices, cases, integrals, sums, limits, vectors, and equation punctuation. Keep display equations separate from surrounding prose and inline equations within their sentences.
 
-- subscripts and superscripts;
-- matrices and cases;
-- integrals, sums, limits, and set-builder notation;
-- bold vectors and calligraphic sets;
-- equation punctuation when grammatically required.
-
-Use ASCII punctuation in prose where renderer compatibility matters, but retain mathematical Unicode inside OMML when supported.
-
+Code examples containing LaTeX remain code examples. Inspect audit findings before changing valid source content.
