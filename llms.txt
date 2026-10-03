@@ -2,7 +2,6 @@
 
 > Convert AI chat transcripts and Markdown into Word DOCX with editable OMML equations.
 
-中文：将 AI 聊天记录转成 Word，保留标题、列表、表格、代码块和消息顺序，公式使用 Word 原生可编辑 OMML。
 
 ## Documentation
 

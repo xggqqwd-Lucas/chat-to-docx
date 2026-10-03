@@ -1,5 +1,8 @@
+# Python bytecode and local environments
 __pycache__/
 *.pyc
 .venv/
+
+# Working files and Office lock files
 work/
 ~$*.docx

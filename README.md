@@ -1,5 +1,74 @@
 # chat-to-docx
 
+[English](#english) | [简体中文](#简体中文)
+
+## English
+
+**Turn AI chat transcripts into Word documents with editable equations.**
+
+Ever copied a formula from ChatGPT into Word, only to get raw LaTeX, broken fractions, or missing subscripts? Pasting equations as images makes even a small edit tedious. Tables and headings often need rebuilding too.
+
+chat-to-docx converts Markdown chat records into DOCX, stores equations as native Word OMML, and preserves headings, lists, tables, and code blocks. It is useful for research derivations, course notes, and technical documentation.
+
+### Usage
+
+Download this repository into your agent's skills directory as `chat-to-docx`. The default Codex location is `~/.codex/skills/chat-to-docx/`.
+
+Attach a Markdown file or paste the chat text, then ask:
+
+```text
+Use $chat-to-docx to convert this chat transcript into Word.
+Preserve message order, headings, tables, lists, and code blocks.
+Use editable OMML for inline and display equations.
+```
+
+The default is a full transcript conversion. Request "extract the latest draft only" when that is what you need.
+
+### Equations and layout
+
+- Recognizes `$...$`, `$$...$$`, `\(...\)`, and `\[...\]` outside code blocks.
+- Keeps inline equations in their sentences and display equations in separate paragraphs.
+- Preserves fractions, scripts, integrals, sums, matrices, and cases.
+- Uses native Word headings, lists, and tables.
+- Checks `m:oMath` objects in the DOCX and inspects rendered pages.
+
+The equations can be modified in the Word equation editor.
+
+### Environment
+
+This is an AI agent skill with conversion and audit helpers.
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Document assembly uses `python-docx`. The equation helper uses `lxml` and a local Office `MML2OMML.XSL` stylesheet to transform Presentation MathML into OMML. Source parsing and assembly are handled by the agent workflow. Obtain the Microsoft stylesheet from your local Office installation; it is not bundled here.
+
+Use the host's `documents` skill or a local document renderer for page inspection. Check complex equations and rendering in your target office application.
+
+```bash
+python scripts/mathml_to_omml.py --self-test
+python scripts/audit_docx.py final.docx --expect-equations 5 --json
+```
+
+### Example
+
+[Signal processing and deep learning](examples/chat-with-equations.md) covers the discrete Fourier transform, continuous wavelet transform, input normalization, and cross-entropy loss. It includes five equations, a table, and a code block.
+
+### Files
+
+| File | Purpose |
+|---|---|
+| [SKILL.md](SKILL.md) | Agent instructions |
+| [Equation workflow](references/equation-workflow.md) | MathML to OMML |
+| [Content extraction](references/extraction-and-cleanup.md) | Chat selection and Markdown cleanup |
+| [mathml_to_omml.py](scripts/mathml_to_omml.py) | Equation conversion helper |
+| [audit_docx.py](scripts/audit_docx.py) | Equation count and artifact checks |
+
+---
+
+## 简体中文
+
 **把 AI 聊天记录转换成 Word，让公式保持可编辑。**
 
 有没有遇到过：ChatGPT 里排版清楚的公式，复制到 Word 后变成一串 LaTeX 源码；分数、上下标和矩阵需要重新输入；公式粘成图片，想改一个变量也得重做？
@@ -63,8 +132,5 @@ python scripts/audit_docx.py final.docx --expect-equations 5 --json
 | [mathml_to_omml.py](scripts/mathml_to_omml.py) | 公式转换辅助脚本 |
 | [audit_docx.py](scripts/audit_docx.py) | 公式数量和文字残留检查 |
 
-## English
 
-An Agent Skill for converting AI chat transcripts and Markdown into Microsoft Word DOCX with editable Office Math Markup Language (OMML) equations. Works with user-supplied ChatGPT, Claude, DeepSeek and Gemini text. Preserves headings, lists, tables, code blocks and message order. Includes a MathML-to-OMML helper and a DOCX audit script.
-
-Related terms: AI 聊天记录转 Word · ChatGPT 公式复制 Word 乱码 · Markdown 转 DOCX · LaTeX 转 Word · OMML · editable Word equations · Agent Skills · Codex skill · Claude skill.
+Related terms / 相关关键词: ChatGPT to Word · AI chat export · Markdown to DOCX · LaTeX to Word · editable equations · OMML · Agent Skills · AI 聊天记录转 Word · 公式复制乱码。
