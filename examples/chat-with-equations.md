@@ -1,64 +1,64 @@
-# 信号处理与深度学习笔记
+# Signal processing and deep learning
 
-> 用于演示文档转换的技术笔记。
+A sample technical note for document conversion.
 
-## 输入要求
+## Conversion request
 
-请整理傅里叶变换、小波变换、归一化和分类损失函数，保留标题、公式、表格和代码，并转成可编辑公式的 Word。
+Export the following note to Word, preserving headings, equations, tables, and code.
 
-## 笔记正文
+## Technical note
 
-### 1. 从时域到频域
+### 1. From time domain to frequency domain
 
-设采样序列为 $x[n]$，长度为 N。离散傅里叶变换为：
+Let $x[n]$ be a sampled sequence of length N. Its discrete Fourier transform is:
 
 $$
 X[k]=\sum_{n=0}^{N-1}x[n]\exp\left(-\mathrm{i}\frac{2\pi kn}{N}\right)
 $$
 
-k 从 0 到 N−1，i 表示虚数单位。FFT 是计算离散傅里叶变换的算法。
+The index k ranges from 0 to N-1, and i is the imaginary unit. An FFT is an algorithm for computing the discrete Fourier transform.
 
-### 2. 连续小波变换
+### 2. Continuous wavelet transform
 
 \[
 W_x(a,b)=\frac{1}{\sqrt{|a|}}\int_{-\infty}^{\infty}x(t)\psi^{*}\left(\frac{t-b}{a}\right)\,\mathrm{d}t
 \]
 
-a 是非零尺度参数，b 是平移参数，星号表示复共轭。离散实现还需要选择采样、尺度和边界处理方式。
+a is a nonzero scale parameter, b is the translation parameter, and the asterisk denotes complex conjugation. A discrete implementation also requires sampling, scale selection, and boundary handling.
 
-### 3. 深度学习输入归一化
+### 3. Input normalization
 
 $$
 z[n]=\frac{x[n]-\mu_{\mathrm{train}}}{\sigma_{\mathrm{train}}+\varepsilon}
 $$
 
-均值和标准差仅由训练集计算。验证集和测试集沿用训练集统计量，避免数据泄漏。epsilon 是正的小常数。
+Compute the mean and standard deviation from the training set. Use the same statistics for validation and testing. Epsilon is a small positive constant.
 
-### 4. 分类损失
+### 4. Classification loss
 
-对 B 个样本、C 个类别的批次，交叉熵损失为：
+For a batch of B samples and C classes, the cross-entropy loss is:
 
 $$
 \mathcal{L}=-\frac{1}{B}\sum_{j=1}^{B}\sum_{c=1}^{C}y_{j,c}\log p_{j,c}
 $$
 
-| 步骤 | 输入 | 输出 |
+| Step | Input | Output |
 |---|---|---|
-| 傅里叶变换 | 时域采样序列 | 复数频谱 |
-| 小波分析 | 信号和尺度参数 | 多尺度系数 |
-| 分类模型 | 预处理信号 | 类别概率 |
+| Fourier transform | Time-domain samples | Complex spectrum |
+| Wavelet analysis | Signal and scale parameters | Multiscale coefficients |
+| Classification | Preprocessed signal | Class probabilities |
 
-- 公式应在 Word 中直接编辑。
-- 代码里的公式字符串保留为代码，不转换成公式对象。
+- Equations should remain editable in Word.
+- Formula strings inside code blocks should remain code.
 
 ```python
-# 四点采样序列的 FFT。
+# FFT of a four-sample sequence.
 import numpy as np
 signal = np.array([0.0, 1.0, 0.0, -1.0])
 spectrum = np.fft.fft(signal)
 formula_as_code = r"\frac{x-\mu}{\sigma}"
 ```
 
-## 转换验收
+## Expected output
 
-本示例含 5 个公式对象：1 个行内公式与 4 个独立公式。代码字符串不计为公式。保留标题、表格、列表和代码块，并检查 DOCX 内有 5 个 m:oMath 对象。
+Five equation objects: one inline equation and four display equations. The code string is not an equation object. Preserve the headings, table, list, and code block, and check for five `m:oMath` objects in the DOCX.
